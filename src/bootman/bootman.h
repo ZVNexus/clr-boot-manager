@@ -34,6 +34,7 @@ typedef enum {
         FSTYPE_EXT2 = 1 << 1,
         FSTYPE_EXT3 = 1 << 2,
         FSTYPE_EXT4 = 1 << 3,
+        FSTYPE_F2FS = 1 << 4,
 } FilesystemType;
 
 /**

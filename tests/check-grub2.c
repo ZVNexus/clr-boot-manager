@@ -1,7 +1,7 @@
 /*
  * This file is part of clr-boot-manager.
  *
- * Copyright © 2016-2018 Intel Corporation
+ * Copyright © 2016-2020 Intel Corporation
  *
  * clr-boot-manager is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License as
@@ -264,8 +264,12 @@ int main(void)
         /* Turn off the EFI variable manipulation. */
         setenv("CBM_BOOTVAR_TEST_MODE", "yes", 1);
 
-        /* Force detection of `ext` filesystem. */
-        setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        /* Force detection of desired filesystem. */
+        if (f2fs > 0) {
+                setenv("CBM_TEST_FSTYPE", "f2fs", 1);
+        } else {
+                setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        }
 
         cbm_blkid_set_vtable(&blkid_ops);
         cbm_system_set_vtable(&SystemTestOps);

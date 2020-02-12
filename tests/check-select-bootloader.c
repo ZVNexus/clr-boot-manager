@@ -14,7 +14,7 @@
  * trying to ascertain that the correct bootloader is selected in every case
  * for the given system configuration.
  *
- * Copyright © 2016-2018 Intel Corporation
+ * Copyright © 2016-2020 Intel Corporation
  *
  * clr-boot-manager is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License as
@@ -240,7 +240,11 @@ static void bootman_select_set_legacy_vtables(void)
 START_TEST(bootman_select_extlinux_native_with_boot)
 {
         PlaygroundConfig config = { "4.2.1-121.kvm", NULL, 0, .uefi = false };
-        setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        if (f2fs > 0) {
+                setenv("CBM_TEST_FSTYPE", "f2fs", 1);
+        } else {
+                setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        }
         autofree(BootManager) *m = NULL;
         bootman_select_set_legacy_vtables();
 
@@ -255,7 +259,11 @@ END_TEST
 START_TEST(bootman_select_extlinux_image_with_boot)
 {
         PlaygroundConfig config = { "4.2.1-121.kvm", NULL, 0, .uefi = false };
-        setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        if (f2fs > 0) {
+                setenv("CBM_TEST_FSTYPE", "f2fs", 1);
+        } else {
+                setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        }
         autofree(BootManager) *m = NULL;
         bootman_select_set_legacy_vtables();
 
@@ -330,7 +338,11 @@ static void bootman_select_set_grub2_vtables(void)
 START_TEST(bootman_select_grub2_native_without_boot)
 {
         static PlaygroundConfig config = { "4.2.1-121.kvm", NULL, 0, .uefi = false };
-        setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        if (f2fs > 0) {
+                setenv("CBM_TEST_FSTYPE", "f2fs", 1);
+        } else {
+                setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        }
         autofree(BootManager) *m = NULL;
         bootman_select_set_grub2_vtables();
 
@@ -355,7 +367,11 @@ END_TEST
 START_TEST(bootman_select_edge_uefi_with_legacy_part_native)
 {
         static PlaygroundConfig config = { "4.2.1-121.kvm", NULL, 0, .uefi = false };
-        setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        if (f2fs > 0) {
+                setenv("CBM_TEST_FSTYPE", "f2fs", 1);
+        } else {
+                setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        }
         autofree(BootManager) *m = NULL;
         bootman_select_set_legacy_vtables();
 
@@ -378,7 +394,11 @@ END_TEST
 START_TEST(bootman_select_edge_uefi_with_legacy_part_image)
 {
         static PlaygroundConfig config = { "4.2.1-121.kvm", NULL, 0, .uefi = false };
-        setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        if (f2fs > 0) {
+                setenv("CBM_TEST_FSTYPE", "f2fs", 1);
+        } else {
+                setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        }
         autofree(BootManager) *m = NULL;
         bootman_select_set_legacy_vtables();
 

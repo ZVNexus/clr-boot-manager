@@ -1,7 +1,7 @@
 /*
  * This file is part of clr-boot-manager.
  *
- * Copyright © 2016-2018 Intel Corporation
+ * Copyright © 2016-2020 Intel Corporation
  *
  * clr-boot-manager is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License as
@@ -49,6 +49,10 @@ static const struct FilesystemMap _fsmap[] = {
     {
         .id = FSTYPE_EXT4,
         .name = "ext4",
+    },
+    {
+        .id = FSTYPE_F2FS,
+        .name = "f2fs",
     },
 };
 
@@ -148,6 +152,8 @@ int cbm_get_filesystem_cap(const char *boot_device)
         case FSTYPE_EXT3:
         case FSTYPE_EXT4:
                 return BOOTLOADER_CAP_EXTFS;
+        case FSTYPE_F2FS:
+                return BOOTLOADER_CAP_F2FS;
         default:
                 return 0;
         }

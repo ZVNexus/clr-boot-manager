@@ -1,7 +1,7 @@
 /*
  * This file is part of clr-boot-manager.
  *
- * Copyright © 2016-2018 Intel Corporation
+ * Copyright © 2016-2020 Intel Corporation
  *
  * clr-boot-manager is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License as
@@ -303,7 +303,7 @@ static int extlinux_get_capabilities(const BootManager *manager)
                 return 0;
         }
 
-        return BOOTLOADER_CAP_GPT | BOOTLOADER_CAP_LEGACY | BOOTLOADER_CAP_EXTFS;
+        return BOOTLOADER_CAP_GPT | BOOTLOADER_CAP_LEGACY | BOOTLOADER_CAP_EXTFS | BOOTLOADER_CAP_F2FS;
 }
 
 __cbm_export__ const BootLoader extlinux_bootloader = {.name = "extlinux",

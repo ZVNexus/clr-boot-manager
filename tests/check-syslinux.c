@@ -1,7 +1,7 @@
 /*
  * This file is part of clr-boot-manager.
  *
- * Copyright © 2016-2018 Intel Corporation
+ * Copyright © 2016-2020 Intel Corporation
  *
  * clr-boot-manager is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License as
@@ -287,13 +287,13 @@ int main(void)
         Suite *s;
         SRunner *sr;
         int fail;
-        /* override test ops for legacy testing */
+        /* Override test ops for legacy testing. */
         CbmBlkidOps blkid_ops = BlkidTestOps;
         blkid_ops.devno_to_wholedisk = legacy_devno_to_wholedisk;
         blkid_ops.partition_get_flags = legacy_partition_get_flags;
         blkid_ops.partition_get_uuid = legacy_partition_get_uuid;
 
-        /* syncing can be problematic during test suite runs */
+        /* Syncing can be problematic during test suite runs. */
         cbm_set_sync_filesystems(false);
 
         /* Ensure that logging is set up properly. */
@@ -303,8 +303,12 @@ int main(void)
         /* Turn off the EFI variable manipulation. */
         setenv("CBM_BOOTVAR_TEST_MODE", "yes", 1);
 
-        /* Force detection of `ext` filesystem. */
-        setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        /* Force detection of desired filesystem. */
+        if (f2fs > 0) {
+                setenv("CBM_TEST_FSTYPE", "f2fs", 1);
+        } else {
+                setenv("CBM_TEST_FSTYPE", "ext4", 1);
+        }
 
         cbm_blkid_set_vtable(&blkid_ops);
         cbm_system_set_vtable(&SystemTestOps);
